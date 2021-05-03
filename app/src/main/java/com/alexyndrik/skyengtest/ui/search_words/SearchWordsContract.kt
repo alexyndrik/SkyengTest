@@ -1,4 +1,4 @@
-package com.alexyndrik.skyengtest.ui.search
+package com.alexyndrik.skyengtest.ui.search_words
 
 import com.alexyndrik.skyengtest.data.remote.model.Word
 import com.alexyndrik.skyengtest.ui.base.IBaseView

@@ -1,4 +1,4 @@
-package com.alexyndrik.skyengtest.ui.search
+package com.alexyndrik.skyengtest.ui.search_words
 
 import android.os.Bundle
 import android.view.View
@@ -39,7 +39,7 @@ class SearchWordsActivity: BaseActivity(), SearchWordsContract.View {
 
         listWords = findViewById(R.id.list_words)
         listWords.layoutManager = LinearLayoutManager(this)
-        listWords.adapter = SearchWordsAdapter()
+        listWords.adapter = SearchWordsAdapter(this)
 
         val searchView = findViewById<SearchView>(R.id.search_word)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -57,7 +57,7 @@ class SearchWordsActivity: BaseActivity(), SearchWordsContract.View {
 
     override fun onWordsReady(items: List<Word>) {
         hideLoading()
-        listWords.adapter = SearchWordsAdapter(items)
+        listWords.adapter = SearchWordsAdapter(this, items)
         (listWords.adapter as SearchWordsAdapter).notifyDataSetChanged()
         showData(items)
     }
