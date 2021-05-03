@@ -1,9 +1,7 @@
 package com.alexyndrik.skyengtest.ui.search
 
-import android.content.Context
 import android.util.Log
 import com.alexyndrik.skyengtest.data.remote.RemoteDataSource
-import com.alexyndrik.skyengtest.data.remote.model.Word
 import com.alexyndrik.skyengtest.ui.base.BasePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -14,11 +12,7 @@ class SearchWordsPresenter(
 
     private val TAG = SearchWordsPresenter::class.java.simpleName
 
-    override fun getWords(context: Context, search: String, page: Int?, pageSize: Int?) {
-        getWordsFromApi(search, page, pageSize)
-    }
-
-    override fun getWordsFromApi(search: String, page: Int?, pageSize: Int?) {
+    override fun getWords(search: String, page: Int?, pageSize: Int?) {
         mView?.showLoading()
         mDisposable = mRemoteDataSource.getWords(search, page, pageSize)
             .subscribeOn(Schedulers.io())
@@ -29,7 +23,6 @@ class SearchWordsPresenter(
 
                     mView?.hideLoading()
                     if (response.isSuccessful) {
-                        saveWords(response.body()?.toList()!!)
                         mView?.onWordsReady(response.body()?.toList()!!)
                     }
                 },
@@ -42,14 +35,6 @@ class SearchWordsPresenter(
                     Log.d(TAG, "completed")
                 }
             )
-    }
-
-    override fun getWordsFromDb(search: String, page: Int?, pageSize: Int?) {
-
-    }
-
-    override fun saveWords(items: List<Word>) {
-
     }
 
 }

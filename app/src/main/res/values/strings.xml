@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">SkyengTest</string>
+    <string name="app_name">Skyeng Test</string>
+
+    <string name="word_search">Word search</string>
+    <string name="no_words_found">No words found</string>
+
 </resources>

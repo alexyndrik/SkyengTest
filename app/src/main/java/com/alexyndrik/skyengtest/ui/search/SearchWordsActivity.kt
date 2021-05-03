@@ -1,6 +1,11 @@
 package com.alexyndrik.skyengtest.ui.search
 
 import android.os.Bundle
+import android.view.View
+import android.widget.LinearLayout
+import android.widget.SearchView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.alexyndrik.skyengtest.R
 import com.alexyndrik.skyengtest.WordsApp
 import com.alexyndrik.skyengtest.data.remote.model.Word
@@ -14,6 +19,9 @@ class SearchWordsActivity: BaseActivity(), SearchWordsContract.View {
     @Inject
     lateinit var mPresenter: SearchWordsPresenter
 
+    private lateinit var listWords: RecyclerView
+    private lateinit var noWordsFoundPanel: LinearLayout
+
     init {
         WordsApp.mWordsComponent?.inject(this)
         mPresenter.attachView(this)
@@ -23,15 +31,45 @@ class SearchWordsActivity: BaseActivity(), SearchWordsContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_words)
         setUp()
-        mPresenter.getWords(this, "fish")
     }
 
     override fun setUp() {
+        progressBar = findViewById(R.id.progress_bar)
+        noWordsFoundPanel = findViewById(R.id.no_words_found_panel)
 
+        listWords = findViewById(R.id.list_words)
+        listWords.layoutManager = LinearLayoutManager(this)
+        listWords.adapter = SearchWordsAdapter()
+
+        val searchView = findViewById<SearchView>(R.id.search_word)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?) = false
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                showLoading()
+                mPresenter.getWords(newText ?: "")
+                return false
+            }
+        })
+
+        showData(listOf())
     }
 
     override fun onWordsReady(items: List<Word>) {
+        hideLoading()
+        listWords.adapter = SearchWordsAdapter(items)
+        (listWords.adapter as SearchWordsAdapter).notifyDataSetChanged()
+        showData(items)
+    }
 
+    private fun showData(items: List<Word>) {
+        if (items.isEmpty()) {
+            listWords.visibility = View.GONE
+            noWordsFoundPanel.visibility = View.VISIBLE
+        } else {
+            listWords.visibility = View.VISIBLE
+            noWordsFoundPanel.visibility = View.GONE
+        }
     }
 
     override fun onDestroy() {
