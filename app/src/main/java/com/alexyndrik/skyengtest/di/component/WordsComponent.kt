@@ -2,7 +2,8 @@ package com.alexyndrik.skyengtest.di.component
 
 import com.alexyndrik.skyengtest.di.module.WordsModule
 import com.alexyndrik.skyengtest.di.scope.WordsScope
-import com.alexyndrik.skyengtest.ui.search.SearchWordsActivity
+import com.alexyndrik.skyengtest.ui.meaning_info.MeaningInfoActivity
+import com.alexyndrik.skyengtest.ui.search_words.SearchWordsActivity
 import dagger.Component
 
 @WordsScope
@@ -10,5 +11,7 @@ import dagger.Component
 interface WordsComponent {
 
     fun inject(view: SearchWordsActivity)
+
+    fun inject(view: MeaningInfoActivity)
 
 }
