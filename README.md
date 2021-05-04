@@ -34,7 +34,7 @@ Pre-requisites:
 1. Clone or Download the repository:
 
   ```shell
-  git clone https://github.com/mozilla-mobile/fenix
+  git clone https://github.com/alexyndrik/SkyengTest.git
   ```
 
 2. In directory with project build APK:
