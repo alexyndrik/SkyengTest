@@ -46,7 +46,7 @@ class SearchWordsAdapter(
                 putExtra(MeaningInfoActivity.MEANING_ID, item.id)
             })
         }
-        GlideUtil.loadImage(context, item.imageUrl, binding.meaningImage)
+        GlideUtil.loadImage(context, item.previewUrl, binding.meaningImage)
         return binding.root
     }
 

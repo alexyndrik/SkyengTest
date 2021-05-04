@@ -11,12 +11,13 @@
         android:layout_height="match_parent"
         android:paddingVertical="5dp"
         android:paddingHorizontal="@dimen/default_horizontal_padding"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/meaning_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             style="@style/CardView.Meaning">
 
             <LinearLayout
@@ -27,7 +28,8 @@
                 <ImageView
                     android:id="@+id/word_image"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitCenter"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -57,21 +59,30 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-        <TextView
-            android:id="@+id/transcription_part_of_speech"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/default_vertical_padding"
-            style="@style/Meaning.Description"
-            android:text="@{String.format(@string/transcription_and_part_of_speech_template, meaning.transcription, meaning.partOfSpeechCode.fullName)}"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/definition"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/default_vertical_padding"
-            style="@style/Meaning.Description"
-            android:text="@{meaning.definition.text}"/>
+            <TextView
+                android:id="@+id/transcription_part_of_speech"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/default_vertical_padding"
+                style="@style/Meaning.Description"
+                android:text="@{String.format(@string/transcription_and_part_of_speech_template, meaning.transcription, meaning.partOfSpeechCode.fullName)}"/>
+
+            <TextView
+                android:id="@+id/definition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/default_vertical_padding"
+                style="@style/Meaning.Description"
+                android:text="@{meaning.definition.text}"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

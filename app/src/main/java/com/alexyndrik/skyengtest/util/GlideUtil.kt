@@ -10,7 +10,7 @@ object GlideUtil {
     fun loadImage(context: Context, urlWithoutHttp: String, imageView: ImageView) {
         val imageUrl = String.format(context.getString(R.string.image_url_template), urlWithoutHttp)
         Glide.with(context)
-            .load(imageUrl.substring(0, imageUrl.indexOf("?")))
+            .load(imageUrl)
             .into(imageView)
     }
 

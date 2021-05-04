@@ -19,7 +19,6 @@ class SearchWordsActivity: BaseActivity(), SearchWordsContract.View {
     lateinit var mPresenter: SearchWordsPresenter
 
     private lateinit var listWords: ExpandableListView
-//    private lateinit var listWords: RecyclerView
     private lateinit var noWordsFoundPanel: LinearLayout
 
     init {
@@ -38,8 +37,6 @@ class SearchWordsActivity: BaseActivity(), SearchWordsContract.View {
         noWordsFoundPanel = findViewById(R.id.no_words_found_panel)
 
         listWords = findViewById(R.id.list_words)
-//        listWords.setHasFixedSize(true)
-//        listWords.layoutManager = LinearLayoutManager(this)
         listWords.setAdapter(SearchWordsAdapter(this))
 
         val searchView = findViewById<SearchView>(R.id.search_word)
@@ -49,7 +46,7 @@ class SearchWordsActivity: BaseActivity(), SearchWordsContract.View {
             override fun onQueryTextChange(newText: String?): Boolean {
                 showLoading()
                 mPresenter.getWords(newText ?: "")
-                return false
+                return true
             }
         })
 
