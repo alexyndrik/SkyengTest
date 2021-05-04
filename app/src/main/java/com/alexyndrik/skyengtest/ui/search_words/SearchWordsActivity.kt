@@ -38,6 +38,7 @@ class SearchWordsActivity: BaseActivity(), SearchWordsContract.View {
         noWordsFoundPanel = findViewById(R.id.no_words_found_panel)
 
         listWords = findViewById(R.id.list_words)
+        listWords.setHasFixedSize(true)
         listWords.layoutManager = LinearLayoutManager(this)
         listWords.adapter = SearchWordsAdapter(this)
 
@@ -57,8 +58,10 @@ class SearchWordsActivity: BaseActivity(), SearchWordsContract.View {
 
     override fun onWordsReady(items: List<Word>) {
         hideLoading()
-        listWords.adapter = SearchWordsAdapter(this, items)
-        (listWords.adapter as SearchWordsAdapter).notifyDataSetChanged()
+        (listWords.adapter as SearchWordsAdapter).apply {
+            setItems(items)
+            notifyDataSetChanged()
+        }
         showData(items)
     }
 

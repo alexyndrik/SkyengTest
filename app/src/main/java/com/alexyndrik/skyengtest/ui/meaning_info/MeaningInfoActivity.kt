@@ -1,6 +1,8 @@
 package com.alexyndrik.skyengtest.ui.meaning_info
 
 import android.os.Bundle
+import androidx.databinding.DataBindingUtil
+import com.alexyndrik.skyengtest.BR
 import com.alexyndrik.skyengtest.R
 import com.alexyndrik.skyengtest.WordsApp
 import com.alexyndrik.skyengtest.data.remote.model.Meaning
@@ -16,6 +18,8 @@ class MeaningInfoActivity: BaseActivity(), MeaningInfoContract.View {
     @Inject
     lateinit var mPresenter: MeaningInfoPresenter
 
+    lateinit var binding: ActivityMeaningInfoBinding
+
     companion object {
         const val MEANING_ID = "meaning_id"
     }
@@ -27,7 +31,10 @@ class MeaningInfoActivity: BaseActivity(), MeaningInfoContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_meaning_info)
+
+        binding = DataBindingUtil.inflate(layoutInflater, R.layout.activity_meaning_info, null, false)
+        setContentView(binding.root)
+
         setUp()
 
         val meaningId = intent.getStringExtra(MEANING_ID)
@@ -44,9 +51,7 @@ class MeaningInfoActivity: BaseActivity(), MeaningInfoContract.View {
     override fun onMeaningsReady(items: List<Meaning>) {
         hideLoading()
         if (items.isNotEmpty()) {
-            val binding = ActivityMeaningInfoBinding.inflate(layoutInflater)
-            binding.meaning = items[0]
-            setContentView(binding.root)
+            binding.setVariable(BR.meaning, items[0])
 
             val imageUrl = String.format(getString(R.string.image_url_template), items[0].images[0].url)
             Glide.with(this)
