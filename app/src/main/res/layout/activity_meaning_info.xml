@@ -11,7 +11,8 @@
         android:layout_height="match_parent"
         android:paddingVertical="5dp"
         android:paddingHorizontal="@dimen/default_horizontal_padding"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/white">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/meaning_info"

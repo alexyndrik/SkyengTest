@@ -8,7 +8,7 @@ versions.constraint_layout = "2.0.4"
 versions.material = "1.3.0"
 versions.rxjava = "2.1.7"
 versions.rxandroid = "2.0.1"
-versions.glide = "4.6.1"
+versions.glide = "4.11.0"
 versions.junit="4.13.2"
 ext.versions = versions
 

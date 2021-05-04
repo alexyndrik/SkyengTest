@@ -11,6 +11,7 @@ object GlideUtil {
         val imageUrl = String.format(context.getString(R.string.image_url_template), urlWithoutHttp)
         Glide.with(context)
             .load(imageUrl)
+            .dontAnimate()
             .into(imageView)
     }
 
