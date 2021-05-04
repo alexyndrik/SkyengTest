@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.SkyengTest" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.SkyengTest" parent="Theme.MaterialComponents.Light.NoActionBar">
 
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -51,7 +51,7 @@
     <style name="CardView.Default" parent="Widget.MaterialComponents.CardView">
         <item name="cardElevation">0dp</item>
         <item name="cardBackgroundColor">@android:color/transparent</item>
-        <item name="cardCornerRadius">@dimen/search_corner_radius</item>
+        <item name="cardCornerRadius">@dimen/default_corner_radius</item>
     </style>
 
     <style name="CardView.Search" parent="CardView.Default">
@@ -62,15 +62,46 @@
         <item name="cardBackgroundColor">@color/blue</item>
     </style>
 
+    <style name="CardView.Word" parent="Widget.MaterialComponents.CardView">
+        <item name="cardElevation">0dp</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MaterialCardView.TopRounded</item>
+    </style>
+
+    <style name="CardView.Word.Meaning" parent="CardView.Word">
+        <item name="cardBackgroundColor">@color/expanded_list_color</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MaterialCardView.BottomRounded</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.MaterialCardView.TopRounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">@dimen/default_corner_radius</item>
+        <item name="cornerSizeTopLeft">@dimen/default_corner_radius</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.MaterialCardView.BottomRounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">0dp</item>
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="cornerSizeBottomRight">@dimen/default_corner_radius</item>
+        <item name="cornerSizeBottomLeft">@dimen/default_corner_radius</item>
+    </style>
+
     <!-- Recycler Viewer -->
 
-    <style name="RecyclerViewerDefault">
+    <style name="ExpandableListView.Default" parent="">
         <item name="android:paddingTop">@dimen/default_vertical_padding</item>
         <item name="android:paddingBottom">@dimen/default_vertical_padding</item>
         <item name="android:scrollbars">vertical</item>
         <item name="android:scrollbarThumbVertical">@drawable/scrollbar</item>
         <item name="android:scrollbarSize">@dimen/scrollbar_size</item>
         <item name="android:clipToPadding">false</item>
+        <item name="android:groupIndicator">@null</item>
+        <item name="android:childIndicator">@null</item>
+        <item name="android:divider">@android:color/transparent</item>
+        <item name="android:childDivider">@color/expanded_list_color</item>
+        <item name="android:dividerHeight">10dp</item>
     </style>
 
 </resources>
