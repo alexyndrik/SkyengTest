@@ -52,7 +52,7 @@ class MeaningInfoActivity: BaseActivity(), MeaningInfoContract.View {
         hideLoading()
         if (items.isNotEmpty()) {
             binding.setVariable(BR.meaning, items[0])
-            GlideUtil.loadImage(this, items[0].images[0].url, binding.wordImage)
+            GlideUtil.loadImage(this, items[0].images[0].url, binding.wordImage, true)
         }
     }
 
