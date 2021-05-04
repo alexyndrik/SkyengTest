@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable name="meaning" type="com.alexyndrik.skyengtest.data.remote.model.Meaning" />
+    </data>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingVertical="5dp"
+        android:paddingHorizontal="@dimen/default_horizontal_padding"
+        android:orientation="horizontal">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/meaning_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            style="@style/CardView.Meaning">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/word_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitCenter"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/default_vertical_padding"
+                    android:paddingBottom="20dp"
+                    android:paddingHorizontal="@dimen/default_horizontal_padding">
+
+                    <TextView
+                        android:id="@+id/current_word"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/WordTitle"
+                        android:text="@{meaning.prefix != null ? String.format(@string/prefix_and_word_template, meaning.prefix, meaning.text) : meaning.text }"/>
+
+                    <TextView
+                        android:id="@+id/translation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/Meaning"
+                        android:text="@{meaning.translation.text}"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/transcription_part_of_speech"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/default_vertical_padding"
+                style="@style/Meaning.Description"
+                android:text="@{String.format(@string/transcription_and_part_of_speech_template, meaning.transcription, meaning.partOfSpeechCode.fullName)}"/>
+
+            <TextView
+                android:id="@+id/definition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/default_vertical_padding"
+                style="@style/Meaning.Description"
+                android:text="@{meaning.definition.text}"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>
