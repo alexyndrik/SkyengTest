@@ -16,4 +16,6 @@
 
     <color name="blue">#FF06B4CB</color>
 
+    <color name="expanded_list_color">@color/grey_100</color>
+
 </resources>

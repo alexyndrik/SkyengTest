@@ -3,6 +3,7 @@
 
     <data>
         <variable name="word" type="com.alexyndrik.skyengtest.data.remote.model.Word" />
+        <variable name="isExpanded" type="boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -11,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="5dp"
-        android:paddingHorizontal="@dimen/default_horizontal_padding">
+        android:paddingHorizontal="@dimen/default_horizontal_padding"
+        android:background="@{isExpanded ? @color/expanded_list_color : @color/white}">
 
         <ImageView
             android:id="@+id/count_icon"
@@ -43,7 +45,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toRightOf="@id/count_icon"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/expand_icon"
             style="@style/Title"
             android:text="@{word.text}"/>
 
@@ -53,10 +55,19 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/word_text"
             app:layout_constraintLeft_toLeftOf="@id/word_text"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintRight_toRightOf="@id/word_text"
             android:singleLine="true"
             style="@style/Description"
             android:text="@{word.meanings}"/>
+
+        <ImageView
+            android:id="@+id/expand_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@{isExpanded ? @drawable/ic_expand_less : @drawable/ic_expand_more}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

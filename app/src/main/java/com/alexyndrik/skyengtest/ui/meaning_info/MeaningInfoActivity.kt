@@ -8,7 +8,7 @@ import com.alexyndrik.skyengtest.WordsApp
 import com.alexyndrik.skyengtest.data.remote.model.Meaning
 import com.alexyndrik.skyengtest.databinding.ActivityMeaningInfoBinding
 import com.alexyndrik.skyengtest.ui.base.BaseActivity
-import com.bumptech.glide.Glide
+import com.alexyndrik.skyengtest.util.GlideUtil
 import javax.inject.Inject
 
 class MeaningInfoActivity: BaseActivity(), MeaningInfoContract.View {
@@ -52,11 +52,7 @@ class MeaningInfoActivity: BaseActivity(), MeaningInfoContract.View {
         hideLoading()
         if (items.isNotEmpty()) {
             binding.setVariable(BR.meaning, items[0])
-
-            val imageUrl = String.format(getString(R.string.image_url_template), items[0].images[0].url)
-            Glide.with(this)
-                .load(String.format(imageUrl.substring(0, imageUrl.indexOf("?"))))
-                .into(binding.wordImage)
+            GlideUtil.loadImage(this, items[0].images[0].url, binding.wordImage)
         }
     }
 

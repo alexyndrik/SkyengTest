@@ -2,10 +2,9 @@ package com.alexyndrik.skyengtest.ui.search_words
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ExpandableListView
 import android.widget.LinearLayout
 import android.widget.SearchView
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.alexyndrik.skyengtest.R
 import com.alexyndrik.skyengtest.WordsApp
 import com.alexyndrik.skyengtest.data.remote.model.Word
@@ -19,7 +18,8 @@ class SearchWordsActivity: BaseActivity(), SearchWordsContract.View {
     @Inject
     lateinit var mPresenter: SearchWordsPresenter
 
-    private lateinit var listWords: RecyclerView
+    private lateinit var listWords: ExpandableListView
+//    private lateinit var listWords: RecyclerView
     private lateinit var noWordsFoundPanel: LinearLayout
 
     init {
@@ -38,9 +38,9 @@ class SearchWordsActivity: BaseActivity(), SearchWordsContract.View {
         noWordsFoundPanel = findViewById(R.id.no_words_found_panel)
 
         listWords = findViewById(R.id.list_words)
-        listWords.setHasFixedSize(true)
-        listWords.layoutManager = LinearLayoutManager(this)
-        listWords.adapter = SearchWordsAdapter(this)
+//        listWords.setHasFixedSize(true)
+//        listWords.layoutManager = LinearLayoutManager(this)
+        listWords.setAdapter(SearchWordsAdapter(this))
 
         val searchView = findViewById<SearchView>(R.id.search_word)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -58,7 +58,7 @@ class SearchWordsActivity: BaseActivity(), SearchWordsContract.View {
 
     override fun onWordsReady(items: List<Word>) {
         hideLoading()
-        (listWords.adapter as SearchWordsAdapter).apply {
+        (listWords.expandableListAdapter as SearchWordsAdapter).apply {
             setItems(items)
             notifyDataSetChanged()
         }
